@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from '../services/toast.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from '../services/user.service';
 export class AccessFormComponent implements OnInit {
   @Input() formType: "login" | "signup" = "login";
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({

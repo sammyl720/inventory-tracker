@@ -1,0 +1,13 @@
+<section class="dashboard">
+  <header class="dashboard__header">
+    <h4 class="dashboard__header__title">
+      Welcome, {{user?.username}}</h4>
+    <p class="dashboard__header__subtitle">
+      Dashboard
+    </p>
+  </header>
+  <hr />
+  <app-product-list [products]="products"></app-product-list>
+  <hr class="divider" />
+  <button class="btn btn-warning" (click)="logout()">Logout</button>
+</section>

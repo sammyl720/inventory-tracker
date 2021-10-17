@@ -21,7 +21,6 @@
 <div *ngIf="!user && isLoading" class="loader">
   <h4>Loading...</h4>
 </div>
-<div *ngIf="user" class="wrapper">
-  <h4>Welcome, {{user.username}}</h4>
-  <button class="btn btn-primary" (click)="logout()">Logout</button>
+<div *ngIf="user">
+  <app-user-dashboard [user]="user"></app-user-dashboard>
 </div>

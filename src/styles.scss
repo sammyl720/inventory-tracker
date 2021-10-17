@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;600;700;800&display=swap');
-
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 * {
   margin: 0;
   padding: 0;
@@ -8,4 +8,55 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+}
+
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  &.btn-danger {
+    background-color: #db2a2a;
+    border: 1px solid #ccc;
+    color: #ccc;
+
+    &:hover {
+      background-color: #ccc;
+      color: #f0f0f0;
+    }
+  }
+
+  &.btn-info {
+    background-color: #4caf50;
+    border: 1px solid #ccc;
+    color: #ccc;
+
+    &:hover {
+      background-color: #ccc;
+      color: #f0f0f0;
+    }
+  }
+
+  &.btn-warning{
+    background-color: #f67823;
+    border: 1px solid #ccc;
+    color: #ccc;
+
+    &:hover {
+      background-color: #ccc;
+      color: #f0f0f0;
+    }
+  }
+}
+
+.divider {
+  margin: 10px 0;
 }

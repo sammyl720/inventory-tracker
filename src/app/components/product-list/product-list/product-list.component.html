@@ -1,0 +1,24 @@
+<table class="product-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Update</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency: 'USD': true }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>
+        <button class="btn btn-info" (click)="updateProduct(product)">Update</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="removeProduct(product)">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

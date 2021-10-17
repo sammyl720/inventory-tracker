@@ -1,0 +1,29 @@
+table.product-table {
+  width: 100%;
+  margin: 1rem auto;
+  thead {
+    th {
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: bold;
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: #e4dede6c;
+      }
+      td {
+        text-align: center;
+        padding: 0.5rem;
+        border-bottom: 1px solid #eaeaea;
+        &:first-child {
+          width: 20%;
+        }
+        &:last-child {
+          width: 20%;
+        }
+      }
+    }
+  }
+}

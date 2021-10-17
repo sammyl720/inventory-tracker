@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { take, tap } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
+import { ToastService } from './toast.service';
 
 export interface User {
   id: number;
@@ -29,7 +30,7 @@ export class UserService {
     this.userSubject$.next(null);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastService: ToastService) { }
 
   getUser(): Observable<any>{
     const token = this.getToken();
@@ -38,17 +39,21 @@ export class UserService {
       headers: {
         'authorization': `Bearer ${token}`
       }
-    }).pipe(tap((res) => {
+    }).pipe(
+      tap((res) => {
+        console.log(res, "res")
       if(res.user)
         this.userSubject$.next(res.user);
-    }))
+      },
+      catchError((error) => {
+        return of(null);
+      })
+    ))
   }
 
 
   loginUser(username: string, password: string): Observable<any>{
-    console.log(username, password);
     const url = environment.api + 'users/login';
-    console.log(url);
     return this.http.post<{ token: string }>(url, {
       username,
       password
@@ -62,6 +67,15 @@ export class UserService {
           localStorage.setItem('token', res.token);
           this.getUser().pipe(take(1)).subscribe();
         }
+      }),
+      catchError((error) => {
+        console.log(error, "error")
+        this.toastService.addToast({
+          message: error.error.error,
+          type: 'error',
+          duration: 3000
+        })
+        return of(null);
       })
     )
   }
@@ -70,6 +84,16 @@ export class UserService {
     return this.http.post(environment.api + 'users/signup', {
       username,
       password
-    });
+    }).pipe(
+      catchError((error) => {
+        console.log(error, "error")
+        this.toastService.addToast({
+          message: error.error.error.message,
+          type: 'error',
+          duration: 3000
+        })
+        return of(null);
+      })
+    )
   }
 }
