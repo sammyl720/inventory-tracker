@@ -12,9 +12,14 @@
       Dashboard
     </p>
   </header>
-  <hr />
-  <app-product-list [products]="products"></app-product-list>
   <hr class="divider" />
+  <app-product-list *ngIf="products.length > 0; else noProducts" [products]="products"></app-product-list>
+  <hr class="divider" />
+  <ng-template #noProducts>
+    <p class="dashboard__no-products">
+      You have no products.
+    </p>
+  </ng-template>
   <button class="btn btn-danger" (click)="logout()">Logout</button>
 </section>
 <app-modal (onDismiss)="hideAddProductModal()" *ngIf="shouldShowAddProductModal">

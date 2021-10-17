@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs/operators';
 import IProduct from 'src/app/models/products';
 import { environment } from 'src/environments/environment';
 import { User, UserService } from '../user.service';
@@ -34,5 +34,13 @@ export class ProductService {
         this.getUserProducts();
       })
     );
+  }
+
+  deleteProduct(id: string) {
+    return this.http.delete<{ message: string}>(`${this.url}/${id}`).pipe(
+      tap(res => {
+        console.log(res);
+        this.getUserProducts();
+      }), take(1), switchMap(() => of({ message: "Product deleted"})));
   }
 }

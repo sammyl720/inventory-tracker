@@ -17,8 +17,15 @@
         <button class="btn btn-info" (click)="updateProduct(product)">Update</button>
       </td>
       <td>
-        <button class="btn btn-danger" (click)="removeProduct(product)">Remove</button>
+        <button class="btn btn-danger" (click)="showRemoveModal(product)">Remove</button>
       </td>
     </tr>
   </tbody>
 </table>
+<app-modal *ngIf="shouldShowRemoveModal">
+  <div class="modal-remove">
+    <h3>Are you sure you want to remove this product?</h3>
+    <button class="btn btn-danger" (click)="removeProduct()">Remove</button>
+    <button class="btn btn-secondary" (click)="hideRemoveModal()">Cancel</button>
+  </div>
+</app-modal>

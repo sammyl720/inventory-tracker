@@ -27,3 +27,20 @@ table.product-table {
     }
   }
 }
+
+.modal-remove {
+  width: 100%;
+  margin: 1rem auto;
+  text-align: center;
+  button {
+    margin:1rem;
+    padding: 0.5rem;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
