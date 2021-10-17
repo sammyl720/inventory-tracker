@@ -15,13 +15,7 @@ export class ProductService {
   }
 
   getUserProducts() {
-    const options: { [ key: string]: any} = {
-      params: {
-        limit: 4
-      }
-    }
-    if(this.user?.id)
-      options.params['userId'] = this.user.id;
-    return this.http.get<IProduct[]>(this.url, options);
+    const apiUrl = environment.api + 'users/products'
+    return this.http.get<IProduct[]>(apiUrl);
   }
 }
