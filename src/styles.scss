@@ -33,7 +33,24 @@ body {
       color: #f0f0f0;
     }
   }
+  &.btn-primary {
+    background-color: #00a8ff;
+    border: 1px solid #ccc;
+    color: #ccc;
 
+    &:hover {
+      background-color: #ccc;
+      color: #f0f0f0;
+    }
+  }
+  &:disabled {
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    color: rgb(26, 22, 22);
+  }
+  &.btn-block {
+    width: 100%;
+  }
   &.btn-info {
     background-color: #4caf50;
     border: 1px solid #ccc;

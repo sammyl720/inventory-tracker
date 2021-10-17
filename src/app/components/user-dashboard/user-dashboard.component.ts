@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import IProduct from 'src/app/models/products';
-import { ProductService } from 'src/app/services/product/product.service';
+import { IResponse, ProductService } from 'src/app/services/product/product.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { User, UserService } from '../../services/user.service'
 @Component({
   selector: 'app-user-dashboard',
@@ -11,21 +13,25 @@ import { User, UserService } from '../../services/user.service'
 })
 export class UserDashboardComponent implements OnInit {
   @Input() user: User | null = null;
+  shouldShowAddProductModal = false;
   products: IProduct[] = [];
-  constructor(private userService: UserService, private productService: ProductService) { }
+  addProductForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    price: ['', [Validators.required, Validators.min(0)]],
+    quantity: ['', [Validators.required, Validators.min(0)]],
+    details: this.fb.group({
+      description: ['', [Validators.required]]
+    })
+  });
+
+  constructor(
+    private userService: UserService,
+    private productService: ProductService,
+    private toastService: ToastService,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.userService.userSubject$.pipe(
-      switchMap(user => {
-        if(user){
-          return this.productService.getUserProducts() as Observable<IProduct[]>;
-        }
-        return of([]);
-      })
-    ).subscribe(products => {
-      this.products = products;
-    })
-    this.productService.getUserProducts().subscribe(products => {
+    this.productService.productSubject$.subscribe(products => {
       this.products = products;
     })
   }
@@ -35,4 +41,22 @@ export class UserDashboardComponent implements OnInit {
     this.user = null;
   }
 
-}
+  showAddProductModal(){
+    this.shouldShowAddProductModal = true;
+  }
+
+  hideAddProductModal(){
+    this.shouldShowAddProductModal = false;
+  }
+
+  addProduct(){
+    this.productService.addProduct(this.addProductForm.value).subscribe(
+      (response: IResponse) => {
+      this.hideAddProductModal();
+      this.toastService.addToast({
+        type: 'success',
+        message: 'Product added successfully',
+        duration: 3000
+      })
+    })
+  }}
