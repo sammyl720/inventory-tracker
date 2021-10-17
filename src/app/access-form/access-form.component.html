@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <div class="form-header">
+    <h1>{{ formType }}</h1>
+  </div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" formControlName="username" required />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" formControlName="password" required />
+  </div>
+  <button type="submit" class="btn" [ngClass]="{ 'btn-primary': form.valid }" [disabled]="form.invalid">{{ formType.toUpperCase()}}</button>
+</form>

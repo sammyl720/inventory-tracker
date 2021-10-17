@@ -1,0 +1,27 @@
+<div *ngIf="!user && !isLoading" class="wrapper">
+  <nav>
+    <button class="btn" [ngClass]="{'btn-active': formType == 'login'}" (click)="changeFormType('login')">Login</button>
+    <button class="btn" [ngClass]="{'btn-active': formType == 'signup'}"
+    (click)="changeFormType('signup')"
+    >Signup</button>
+  </nav>
+  <div class="hero">
+    <div class="bg"></div>
+    <div class="about">
+      <h1>Welcome to the best social network ever!</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Donec eget nunc euismod, consectetur nisl eu,
+        congue nunc.
+      </p>
+    </div>
+    <app-access-form [formType]="formType"></app-access-form>
+  </div>
+</div>
+<div *ngIf="!user && isLoading" class="loader">
+  <h4>Loading...</h4>
+</div>
+<div *ngIf="user" class="wrapper">
+  <h4>Welcome, {{user.username}}</h4>
+  <button class="btn btn-primary" (click)="logout()">Logout</button>
+</div>
