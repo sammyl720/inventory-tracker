@@ -35,6 +35,13 @@ export class ProductService {
       })
     );
   }
+  updateProduct(productId: string, product: Partial<IProduct>) {
+    return this.http.put<IResponse>(this.url + "/" + productId, product).pipe(
+      tap(res => {
+        this.getUserProducts();
+      })
+    );
+  }
 
   deleteProduct(id: string) {
     return this.http.delete<{ message: string}>(`${this.url}/${id}`).pipe(

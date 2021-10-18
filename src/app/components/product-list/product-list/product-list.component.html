@@ -29,3 +29,7 @@
     <button class="btn btn-secondary" (click)="hideRemoveModal()">Cancel</button>
   </div>
 </app-modal>
+<app-modal *ngIf="shouldShowEditModal" (onDismiss)="hideEditModal()">
+  <app-product-form [product]="productToEdit" (onDone)="hideEditModal()"></app-product-form>
+</app-modal>
+

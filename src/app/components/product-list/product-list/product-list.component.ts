@@ -12,13 +12,17 @@ export class ProductListComponent implements OnInit {
   @Input() products: IProduct[] = [];
   shouldShowRemoveModal = false;
   productToRemove: IProduct | null = null;
+
+  shouldShowEditModal = false;
+  productToEdit: IProduct | null = null;
+
   constructor(private productService: ProductService, private toastService: ToastService) { }
 
   ngOnInit(): void {
   }
 
   updateProduct(product: IProduct) {
-    console.log(product);
+    this.showEditModal(product);
   }
 
   removeProduct() {
@@ -46,4 +50,13 @@ export class ProductListComponent implements OnInit {
     this.productToRemove = null;
   }
 
+  showEditModal(product: IProduct) {
+    this.shouldShowEditModal = true;
+    this.productToEdit = product;
+  }
+
+  hideEditModal() {
+    this.shouldShowEditModal = false;
+    this.productToEdit = null;
+  }
 }

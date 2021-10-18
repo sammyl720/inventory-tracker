@@ -12,6 +12,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { ProductListComponent } from './components/product-list/product-list/product-list.component';
 import { AuthInterceptor } from './interceptors/auth-interceptor/auth-interceptor';
 import { ModalComponent } from './components/modal/modal/modal.component';
+import { ProductFormComponent } from './components/product-form/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalComponent } from './components/modal/modal/modal.component';
     ToastComponent,
     UserDashboardComponent,
     ProductListComponent,
-    ModalComponent
+    ModalComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
